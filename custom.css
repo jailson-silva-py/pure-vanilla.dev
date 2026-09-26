@@ -1,0 +1,51 @@
+.center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.shadow-default {
+    box-shadow: 0 0 1px 0 oklch(from var(---color-text) l c h / 15%);
+}
+
+
+.menu {
+
+    height: var(--spacing) * 25;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 4);
+    background: var(--color-background);
+
+}
+
+.profile-name-content {
+    gap:calc(var(--spacing) * 2);
+    letter-spacing: 4px;
+   
+
+}
+
+.profile-name-description {
+    box-shadow: var(--shadow-accent);
+    border-radius: var(--default-radius);
+    height: calc(var(--spacing) * 6);
+    width: 100%;
+}
+
+.item-btns-menu-container {
+
+    display: flex;
+    flex-direction: row;
+    gap: calc((var(--spacing) * 4));
+
+}

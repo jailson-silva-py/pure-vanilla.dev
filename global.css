@@ -1,38 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
-@import "keyframes.css";
+@import "/keyframes.css";
+@import "/custom.css";
 
 :root {
 
-    --color-primary: #32345d;
-    --color-secondary: #494a75;
-    --color-accent: #494a75;
-    --color-background:#7675a4;
-    ---color-foreground:#8c8bbb;    
-    ---color-text:#ede2e2;
+    --color-primary: oklch(0.8853 0 0);
+    --color-secondary: oklch(0.1543 0 0);
+    --color-background:oklch(0.1696 0.0017 17.32);
+    --color-text:oklch(0.8544 0.0197 76);
     --spacing:0.25rem;
     --font-comfortaa:"Comfortaa", sans-serif;
     --font-gowun-batang:"Gowun Batang", serif;
+    --default-shadow: 0 0 1px 1px oklch(from var(--color-text) l c h / 15%);
+    --shadow-accent: 0 0 1px 1px oklch(from var(--color-text) l c h / 40%);
+    --default-radius: calc(var(--spacing) * 2);
 }
 
-.center-center {
-
-    justify-content: center;
-    align-items: center;
-}
-
-.flex {
-    display: flex;
-}
-
-.flex-col {
-    display: flex;
-    flex-direction: column;
-}
-
-.shadow-default {
-    box-shadow: 0 0 1px 0 rbga(rgb(var(---color-text)), 0.3);
-}
 
 *, *::before, *:after {
 
@@ -48,6 +32,11 @@ html {
     overflow-x: hidden;
     height: 100vh;
     width: 100vw;
+    font-size: 16px;
+    color: var(--color-text);
+    background: var(--color-background);
+    font-family: var(--font-gowun-batang);
+    letter-spacing: 2px;
 
 }
 
@@ -56,13 +45,39 @@ body {
     overflow-x:hidden;
     width: 100%;
     height: 100%;
+    background-color: var(--color-background);
+    font-size: 12px;
+    font-weight: 300;
+}
+
+main {
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 2);
 }
 
 
 path {
-    fill:none;
-    stroke:var(---color-text);
+    stroke:var(--color-text);
     stroke-width: 1;
     animation: draw 1000ms ease;
 }
 
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color:inherit;
+}
+
+button {
+    color:inherit;
+    background:none;
+    border: none;
+}
+
+svg {
+    stroke:1;
+    color:var(--color-text)
+}

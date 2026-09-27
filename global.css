@@ -10,10 +10,11 @@
     --color-secondary: oklch(0.1543 0 0);
     --color-background:oklch(0.1696 0.0017 17.32);
     --color-text:oklch(0.8544 0.0197 76);
+    --color-shadow:oklch(from var(--color-text) l c h / 15%);
     --spacing:0.25rem;
     --font-comfortaa:"Comfortaa", sans-serif;
     --font-gowun-batang:"Gowun Batang", serif;
-    --default-shadow: 0 0 1px 1px oklch(from var(--color-text) l c h / 15%);
+    --default-shadow: 0 0 1px 1px var(--color-shadow);
     --shadow-accent: 0 0 1px 1px oklch(from var(--color-text) l c h / 40%);
     --default-radius: calc(var(--spacing) * 2);
     --text-xs:10px;
@@ -81,7 +82,7 @@ button {
 
     color:inherit;
     background:none;
-    font-weight: 700;
+    font-weight: 400;
     border: none;
     cursor:pointer;
     height: calc(var(--spacing) * 7);

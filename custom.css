@@ -101,12 +101,17 @@
     padding-inline: calc(var(--spacing) * 8);
     padding-block: calc(var(--spacing) * 2);
     border-radius: var(--spacing);
+    font-weight: 700;
+}
+
+.btn-deploy:hover {
+    background: oklch(from var(--color-text) calc(l - 0.1) c h);
 }
 
 #build-logs-container {
     padding:calc(var(--spacing)*2);
     width: 100%;
-    height: 150px;
+    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,8 +129,6 @@
 
 .hook-button {
     width: 100%;
-    height: 100%;
-
 }
 
 .hook-button:hover{
@@ -153,14 +156,11 @@
     height: 18px;
 }
 
-.folder-title {
-    font-weight: 400;
-    letter-spacing: var(--spacing);
-    font-size: var(--text-xs);
-}
-
-.folders-content li {
-    height: calc(var(--spacing) * 8);
+.folders-content > li {
+    min-height: calc(var(--spacing) * 8);
+    display: flex;
+    flex-direction: column;
+    height: max-content;
     border-style: solid;
     border: 1px solid var(--color-shadow);
     border-top: none;
@@ -168,9 +168,158 @@
     border-width: 1px;
 }
 
+
+.folder-title {
+    font-weight: 400;
+    letter-spacing: var(--spacing);
+    font-size: var(--text-xs);
+}
+
+.folder-content {
+    padding: calc(var(--spacing)*4);
+    display: flex;
+    flex-direction: column;
+    gap:calc(var(--spacing)*4)
+}
+.introduction-about-me-content {
+  list-style-type: upper-roman;
+  padding-block: calc(var(--spacing)*2);
+  display: flex;
+  flex-direction: column;
+  gap:calc(var(--spacing)*2);
+
+}
+
+.project-content {
+
+    display: flex;
+    flex-direction: column;
+    gap:calc(var(--spacing)*4);
+}
+
+.project-item {
+    display: flex;
+    flex-direction: column;
+    gap:calc(var(--spacing)*4);
+    word-wrap: break-word;
+}
+
+.project-item video {
+    display: block;
+    width: 100%;
+    max-width: calc(var(--spacing)*100);
+    border-radius: var(--default-radius);
+    box-shadow: var(--default-shadow);  
+    object-fit: cover;
+}
+
+.project-item-links-content {
+    width: 100%;
+    height: calc(var(--spacing)*6);
+}
+
+
+.stack-content {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(calc(var(--spacing)*65), 1fr));
+    gap:calc(var(--spacing)*4);
+
+}
+
+
+.stack-item  {
+    box-shadow: var(--default-shadow);
+    display: flex;
+    height: calc(var(--spacing)*50);
+    flex-direction: column;
+    padding-block: calc(var(--spacing)*4);
+    padding-inline: calc(var(--spacing)*6);
+    border-radius: var(--default-radius);
+    gap:calc(var(--spacing)*2);
+}
+
+.stack-item-title {
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+.icon-text-container:has(.stack-item-title) {
+    height: 36px;
+    border-bottom: solid 1px var(--color-shadow);
+}
+
+.form-contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: calc(var(--spacing)*6);
+}
+
+.default-field {
+    display: inline-block;
+    position: relative;
+}
+
+.default-title-input {
+    text-wrap: nowrap;
+    position: absolute;
+    top:-2px;
+    font-size: var(--text-small);
+    background:var(--color-background);
+    padding-inline: 4px;
+    color: oklch(from var(--color-text) l c h / 60%);
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.default-input {
+    box-shadow:var(--default-shadow);
+    padding-inline: calc(var(--spacing)*2);
+    height: calc(var(--spacing)*6);
+}
+
+.contact-input {
+
+    border-end-end-radius: 0!important;
+    border-start-end-radius: 0!important;
+    border-inline-end: none;
+}
+
+.btn-contact {
+    background: var(--color-primary);
+    color: var(--color-background);
+    font-weight: 700;
+    font-size: var(--text-xs);
+    border-end-start-radius: 0 !important;
+    border-start-start-radius: 0 !important;
+    border-radius: var(--spacing);
+    height: calc(100%);
+    padding-inline: calc(var(--spacing)*2);
+}
+
+.social-medias-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:calc(var(--spacing)* 4)
+}
+
+.social-medias-content:has(.icon-text-container) .icon-text-container {
+    gap:var(--spacing)
+}
+
+.curiosities-content {
+  list-style-type: upper-roman;
+  padding-block: var(--spacing);
+}
+
+
 .btn-expand-all {
     padding-inline: calc(var(--spacing)*1);
     margin-left: auto;
+    font-size: var(--text-xs);
     width: max-content;
     font-weight: 500;
     letter-spacing: var(--spacing);

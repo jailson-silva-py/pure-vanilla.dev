@@ -14,11 +14,17 @@
     --spacing:0.25rem;
     --font-comfortaa:"Comfortaa", sans-serif;
     --font-gowun-batang:"Gowun Batang", serif;
-    --default-shadow: 0 0 1px 1px var(--color-shadow);
+    --default-shadow: 0 0 0px 1px var(--color-shadow);
+    --shadow-focus:0 0 0 1px oklch(from var(--color-text) l c h / 50%);
     --shadow-accent: 0 0 1px 1px oklch(from var(--color-text) l c h / 40%);
     --default-radius: calc(var(--spacing) * 2);
+    --text-small:8px;
     --text-xs:10px;
     --text-sm:12px;
+    --text-md:14px;
+    --text-lg:16px;
+    --text-xl:18px;
+    --text-xl2:20px;
 
 }
 
@@ -28,8 +34,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: oklch(from var(--color-text) l c h / 20%) transparent;
 
 }
+
 
 
 html {
@@ -74,8 +83,31 @@ ul {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    letter-spacing: normal;
     color:inherit;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 400;
+    letter-spacing: 4px;
+}
+
+h1 {font-size: var(--text-xl2);} h2 {font-size: var(--text-xl);} h3 {font-size: var(--text-lg);} h4{font-size: var(--text-md);}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    color:inherit;
+    border:none;
+    background: none;
+    border-radius: calc(var(--spacing));
+    font-family: inherit;
+    letter-spacing: inherit;
+    font-size: inherit;
+    outline: none;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    box-shadow: var(--shadow-focus);
 }
 
 button {
@@ -91,6 +123,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: inherit;
 }
 
 svg  {

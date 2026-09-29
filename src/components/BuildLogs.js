@@ -4,7 +4,7 @@ export class BuildLogs extends HTMLElement {
         super();
         this.innerHTML = `
         <ul id="build-logs-container">
-        <slot><slot>
+        <slot></slot>
         </ul>
         `
     }
@@ -22,7 +22,7 @@ export class BuildLogs extends HTMLElement {
     }
 
     static get observedAttributes() {
-      console.log("get atributes")
+
       return ["items-json"]
     }
 
@@ -90,17 +90,6 @@ export class BuildLogs extends HTMLElement {
         
       })
      
-        
-      // const html = this._items.map(item => `
-      //   <li>
-      //   <button class="icon-text-container build-logs-button">
-      //   
-      //   <span>${item}</span>
-      //   <button>
-      //   </li>
-      //   `).join('');
-      // console.log(html)
-      // ul.innerHTML = html;
     }
 }
  

@@ -1,41 +1,48 @@
+import { folderChange, foldersMaximizeAll, foldersMinimizeAll } from "/contraints/customEvents.js";
+
 export class BtnExpandAll extends HTMLElement {
 
   constructor() {
     super();
-    let isExpandable = true;
-    this.innerHTML = `
-      <button class="btn-expand-all hook-button">${isExpandable ? "Expand all": "Minimize-all"}</button>
-    `
+    const button = document.createElement("button");
+    button.classList.add("btn-expand-all", "hook-button");
+    button.textContent = "Expand all"
+    this.innerHTML= ``;
+    this.appendChild(button)
     
-    this.addEventListener("click", (e) => {
-      e.preventDefault()
-      const listFolders = document.querySelectorAll(".hook-button");
+    let maximizeAll = true;
 
-      let indexExpandAll = -1;
-      for (let i = 0;i < listFolders.length; i++) {
-        const el = listFolders[i];
-        const container = el.parentElement;
-        const folderContent = container.querySelector(".folder-content");
-        if (!el) continue;
-        if (el.classList.contains("btn-expand-all")) {
-          indexExpandAll = i;
-          continue
-        };
-        if (!folderContent) continue;
-        isExpandable ? folderContent.classList.remove("hidden"):folderContent.classList.add("hidden");
-        }
-      const BtnExpandAll = listFolders[indexExpandAll];
-      if (!BtnExpandAll) {
-        console.error("Expand-all não encontrado")
+    document.addEventListener(folderChange, (e) => {
+
+      const {isOpenedFolders} = e.detail;
+      const maximizedAll = isOpenedFolders.every(v => v.isOpen);
+   
+      if (maximizedAll) {
+        maximizeAll = false;
+        button.textContent = "Minimize all";
         return
       }
-      if (isExpandable) {
-        BtnExpandAll.innerText = "Minimize all";
-      } else {
-        BtnExpandAll.innerText = "Expand all";
+
+      maximizeAll = true;
+      button.textContent = "Expand all";
+
+    })
+  
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      if (maximizeAll) {
+        const maximizeAllEvent = new CustomEvent(foldersMaximizeAll, {bubbles:true, composed:true});
+        this.dispatchEvent(maximizeAllEvent);
+        maximizeAll = false;
+        button.textContent = "Minimize all";
+        return;
       }
-      isExpandable = !isExpandable;
-      console.log(isExpandable)
+      const minimizeAllEvent = new CustomEvent(foldersMinimizeAll, {bubbles:true});
+      this.dispatchEvent(minimizeAllEvent);
+      maximizeAll = true;
+      button.textContent = "Expand all";
+
     })
   }
 

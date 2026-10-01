@@ -1,0 +1,23 @@
+@media(min-width:792px) {
+
+ 
+  :root {
+
+    --text-small:10px !important;
+    --text-xs:12px !important;
+    --text-sm:14px !important;
+    --text-md:16px !important;
+    --text-lg:18px !important;
+    --text-xl:20px !important;
+    --text-xl2:22px !important;
+    }
+   header {
+    padding-inline: calc(var(--spacing)*4);
+  }
+  
+  main {
+    padding-inline: calc(var(--spacing)*16) !important;
+    align-items: center;
+  }
+
+}

@@ -8,14 +8,14 @@ export class IntroducaoContent extends HTMLElement {
          <p>Desenvolvedor full-stack.</p>
         </div>
         <h4>Quem ele não é:</h4>
-        <ol class="introduction-about-me-content">
-        <li>Não é aquele que cola solução sem entender o porque funcina.</li>
-        <li>Não é o fã de "best pratices" que são na verdade piores práticas disfarçadas de padrões da indústria.</li>
-        <li>Não é quem entrega código ruim porque "o prazo tava apertado".</li>
-        <li>Não é alguém que usa framework pra tudo (inclusive problemas simples) apenas para pesar no bundle.</li>
-        <li>Não é uma pessoa que fica satisfeita com o conhecimento estagnado.</li>
-        <li>Não é o dev que faz um sistema pra quebrar as 2h da madrugada.</li>
-        </ol    >
+        <ul class="introduction-about-me-content">
+        <li><p>Não é aquele que cola solução sem entender o porque funciona.</p></li>
+        <li><p>Não é o fã de "best pratices" que são na verdade piores práticas disfarçadas de padrões da indústria.</p></li>
+        <li><p>Não é quem entrega código ruim porque "o prazo tava apertado".</p></li>
+        <li><p>Não é alguém que usa framework pra tudo (inclusive problemas simples) apenas para pesar no bundle.</p></li>
+        <li><p>Não é uma pessoa que fica satisfeita com o conhecimento estagnado.</p></li>
+        <li><p>Não é o dev que faz um sistema pra quebrar as 2h da madrugada.</p></li>
+        </ul>
         <p>Pergunte-me o que sei que direi-vos o que não sabe. (2026, Pereira, Jailson S.)</p>
         </div>
         `

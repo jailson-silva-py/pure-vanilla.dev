@@ -3,7 +3,7 @@ export class Curiosities extends HTMLElement {
         super();
         this.innerHTML = `
         <div id="curiosities" class="folder-content hidden">
-            <ol class="curiosities-content">
+            <ul class="curiosities-content">
             <li>
             <p>Odeia código ruim e mal documentado.</p>
             </li>
@@ -22,7 +22,7 @@ export class Curiosities extends HTMLElement {
             <li>
             <p>Ele se sente desconfortável em implementar "soluções" sem entender completamente o que foi feito.</p>
             </li>
-            </ol>
+            </ul>
             <p>Deve ser delicioso criar um CRUD em linguagem esotérica. (2026, Pereira, Jailson S.)</p>
         </div>
         `

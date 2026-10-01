@@ -3,6 +3,7 @@
 @import "/keyframes.css";
 @import "/custom.css";
 @import "/utils.css";
+@import "/responsivity.css";
 
 :root {
 
@@ -18,6 +19,7 @@
     --shadow-focus:0 0 0 1px oklch(from var(--color-text) l c h / 50%);
     --shadow-accent: 0 0 1px 1px oklch(from var(--color-text) l c h / 40%);
     --default-radius: calc(var(--spacing) * 2);
+    --height-xs: calc(var(--spacing)*7);
     --text-small:8px;
     --text-xs:10px;
     --text-sm:12px;
@@ -27,6 +29,8 @@
     --text-xl2:20px;
 
 }
+
+ 
 
 :root[class="light-mode"] {
 
@@ -44,10 +48,14 @@
     box-sizing: border-box;
     scrollbar-width: thin;
     scrollbar-color: oklch(from var(--color-text) l c h / 20%) transparent;
+    
+    
 
 }
 
-
+*:focus-visible {
+    outline: 1px solid var(--color-text);
+}
 
 html {
     
@@ -84,6 +92,7 @@ main {
     padding-block: calc(var(--spacing) * 2);
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: calc(var(--spacing) * 4)
 }
 
@@ -133,7 +142,7 @@ button {
     font-weight: 400;
     border: none;
     cursor:pointer;
-    height: calc(var(--spacing) * 7);
+    height: var(--height-xs);
     font-size:var(--text-sm);
     font-family: inherit;
     display: flex;
@@ -149,3 +158,4 @@ svg  {
     color:oklch(from var(--color-text) l c h / 60%);
     animation: draw 1000ms ease forwards;
 }
+

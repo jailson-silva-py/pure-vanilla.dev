@@ -28,6 +28,14 @@
 
 }
 
+:root[class="light-mode"] {
+
+    --color-primary:oklch(22.438% 0.00311 16.938);
+    --color-secondary:oklch(0.8453 0 0);
+    --color-background:oklch(0.8853 0 0);
+    --color-text:oklch(23.298% 0.00308 16.905);
+}
+
 
 *, *::before, *:after {
 
@@ -51,6 +59,7 @@ html {
     background: var(--color-background);
     font-family: var(--font-gowun-batang);
     letter-spacing: 2px;
+    transition: color 300ms ease-in-out, background 400ms ease;
 
 }
 
@@ -82,6 +91,7 @@ main {
 path {
     stroke-width: 1;
     animation: draw 1000ms ease;
+    color:var(--color-text);
 }
 
 ul {

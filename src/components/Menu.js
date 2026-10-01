@@ -40,6 +40,24 @@ export class Menu extends HTMLElement {
         </ul>
         </nav>
         `
+        //Verificação de tema correto e alteração nos elementos de acordo com.
+        const darkModeStorage = localStorage.getItem("darkMode");
+        console.log(darkModeStorage)
+        const darkModeValue = darkModeStorage ? JSON.parse(darkModeStorage):null;
+        if (darkModeValue === null) {
+          console.log("Não há darkMode value");
+          localStorage.setItem("darkMode", JSON.stringify(this.darkMode));
+        }
+        this.darkMode = darkModeValue;
+        const incorrectMode = this.darkMode ? "light-mode" : "dark-mode";
+        const isIncorrectModeTheme = document.documentElement.classList.contains(incorrectMode);
+        if (isIncorrectModeTheme) {
+          const correctMode = this.darkMode ? "dark-mode":"light-mode";
+          document.documentElement.classList.replace(incorrectMode, correctMode);
+        }
+        console.log(this.darkMode, darkModeValue)
+        
+
     /**handle para realizar a animação de abertura e fechadura do menu @param isOpenAnimation */
     const handleAnimationMenu = (isOpenAnimation) => {
 
@@ -75,7 +93,7 @@ export class Menu extends HTMLElement {
     const buttonDarkLight = document.createElement("button");
     const buttonMenu = this.querySelector("button:has(#icon-menu)");
     console.log(buttonMenu)
-    buttonDarkLight.appendChild(this.iconMoon);
+    buttonDarkLight.appendChild(this.darkMode ? this.iconMoon : this.iconSun);
     const adjacentButton = document.querySelector(".item-btns-menu-container > button");
     adjacentButton.insertAdjacentElement("beforebegin", buttonDarkLight);
 
@@ -83,26 +101,27 @@ export class Menu extends HTMLElement {
     buttonDarkLight.addEventListener("click", (e) => {
       e.preventDefault();
       if (this.darkMode) {
-        buttonDarkLight.replaceChild(this.iconSun, this.iconMoon);
-        this.darkMode = false;
+  
         try {
+          buttonDarkLight.replaceChild(this.iconSun, this.iconMoon);
+          this.darkMode = false;
           document.documentElement.classList.replace("dark-mode", "light-mode");
+          localStorage.setItem("darkMode", JSON.stringify(this.darkMode))
 
         } catch(e) {
-          console.error("Erro ao trocar a class 'dark-mode' por 'light-mode' ");
+          console.error("Erro ao trocar a class 'dark-mode' por 'light-mode' ", e);
         }
         return
       }
 
-      
-      buttonDarkLight.replaceChild(this.iconMoon, this.iconSun);
-      this.darkMode = true;
-
       try {
+          buttonDarkLight.replaceChild(this.iconMoon, this.iconSun);
+          this.darkMode = true;
           document.documentElement.classList.replace("light-mode", "dark-mode");
+          localStorage.setItem("darkMode", JSON.stringify(this.darkMode))
 
         } catch(e) {
-          console.error("Erro ao trocar a class 'dark-mode' por 'light-mode' ");
+          console.error("Erro ao trocar a class 'dark-mode' por 'light-mode' ", e);
       }
 
     })

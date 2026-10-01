@@ -92,7 +92,7 @@
 .dropdown-menu {
     border-top: solid 1px var(--color-shadow);
     border-bottom: solid 1px var(--color-shadow);
-    animation: expandHeight 500ms ease both;
+    animation: expandHeight 500ms ease both;    
     position: absolute;
     top:100%;
     left: 0;
@@ -106,8 +106,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    justify-items: center;
+    align-items: center;
 }
+
 
 .dropdown-menu li:hover {
 

@@ -1,3 +1,5 @@
+import { changeMenuState } from "/contraints/customEvents.js";
+
 export class Menu extends HTMLElement {
   iconMoon = null;
   iconSun = null;
@@ -28,11 +30,11 @@ export class Menu extends HTMLElement {
             </div>
             </button>
             <ul class="hidden dropdown-menu">
-            <li><button>Introdução</button></li>
-            <li><button>Projetos</button></li>
-            <li><button>Stack</button></li>
-            <li><button>Contato</button></li>
-            <li><button>Curiosidades</button></li>
+            <li><btn-goto-view text="Introdução" goto="introduction"></btn-goto-view></li>
+            <li><btn-goto-view text="Projetos" goto="projects"></btn-goto-view></li>
+            <li><btn-goto-view text="Stack" goto="stack"></btn-goto-view></li>
+            <li><btn-goto-view text="Contato" goto="contact"></btn-goto-view></li>
+            <li><btn-goto-view text="Curiosidades" goto="curiosities"></btn-goto-view></li>
             </ul>
         </li>
         </ul>
@@ -105,8 +107,19 @@ export class Menu extends HTMLElement {
 
     })
 
+
+    const dropdownMenu = this.querySelector(".dropdown-menu");
+
     buttonMenu.addEventListener("click", (e) => {
-      const dropdownMenu = this.querySelector(".dropdown-menu");
+  
+      e.preventDefault();
+      const eventChangeMenu = new CustomEvent(changeMenuState, {bubbles:true, cancelable:true});
+      this.dispatchEvent(eventChangeMenu);
+
+    })
+
+
+    document.addEventListener(changeMenuState, (e) => {
       e.preventDefault();
       if (!this.openMenu) {
         handleAnimationMenu(true);

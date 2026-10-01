@@ -2,7 +2,7 @@ export class ProjectsContent extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-        <div class="folder-content hidden">
+        <div id="projects" class="folder-content hidden">
         <div>
         <h4>Veja sua evolução</h4>
         <p>Em ordem decrescente:</p>

@@ -10,8 +10,10 @@ import { ProjectsContent } from "./ProjectsContent.js";
 import { StackComponent } from "./StackComponent.js";
 import { ProjectItemComponent } from "./ProjectItemComponent.js";
 import { BtnExpandAll } from "./BtnExpandAll.js";
+import { BtnGoToInView } from "./BtnGoToInView.js";
 
 customElements.define("p-menu", Menu);
+customElements.define("btn-goto-view", BtnGoToInView);
 customElements.define("deploy-panel", DeployPanel);
 customElements.define("build-logs", BuildLogs)
 customElements.define("folders-list", Folders);

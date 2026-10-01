@@ -2,7 +2,7 @@ export class Curiosities extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-        <div class="folder-content hidden">
+        <div id="curiosities" class="folder-content hidden">
             <ol class="curiosities-content">
             <li>
             <p>Odeia código ruim e mal documentado.</p>

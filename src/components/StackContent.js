@@ -2,7 +2,7 @@ export class StackContent extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-        <div class="folder-content hidden">
+        <div id="stack" class="folder-content hidden">
         <h3>Stack Principal:</h3>
         <p>Sua mente.</p>
         <h3>Outros:</h3>

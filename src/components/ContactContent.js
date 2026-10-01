@@ -2,7 +2,7 @@ export class ContactContent extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-        <div class="folder-content hidden">
+        <div id="contact" class="folder-content hidden">
         <form class="form-contact">
         <label class="default-field">
         <span class="default-title-input">Envie um e-mail: </span>

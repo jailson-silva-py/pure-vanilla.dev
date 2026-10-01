@@ -41,11 +41,62 @@
 }
 
 @keyframes draw {
-    from {
-        stroke-dashoffset: 500;
-    }
     to {
         stroke-dashoffset: 0;
     }
 }
 
+@keyframes spawnTopToBottom {
+    from {
+        transform: translate(0, -10px);
+    }
+}
+
+@keyframes spawnBottomfromTop {
+    from {
+        transform: translate(0, 10px);
+    }
+}
+
+@keyframes expandWidth {
+
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+
+}
+
+@keyframes expandHeight {
+
+    from {
+        transform-origin: top;
+        transform: scaleY(0);
+
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+
+}
+
+@keyframes rotate-line-1 {
+    to {
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%, -50%), rotate(45deg);
+    }
+}
+
+@keyframes rotate-line-2 {
+    to {
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%, -50%), rotate(-45deg);
+    }
+}

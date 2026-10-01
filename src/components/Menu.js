@@ -1,9 +1,12 @@
 export class Menu extends HTMLElement {
-    constructor() {
-        super();
-    }
-    connectedCallback() {
-        this.innerHTML = `
+  iconMoon = null;
+  iconSun = null;
+  darkMode = true;
+  openMenu = false;
+
+  constructor() {
+    super();
+    this.innerHTML = `
         <nav>
         <ul class="menu">
         <li>
@@ -16,15 +19,107 @@ export class Menu extends HTMLElement {
         </li>
 
         <li class="item-btns-menu-container">
+            <!--Botão com ícone sun / moon aqui -->
             <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon preview-icon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+            <div id="icon-menu">
+            <div class="line-1"></div>
+            <div class="line-2"></div>
+            <div class="line-3"></div>
+            </div>
             </button>
-            <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu preview-icon"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
-            </button>
+            <ul class="hidden dropdown-menu">
+            <li><button>Introdução</button></li>
+            <li><button>Projetos</button></li>
+            <li><button>Stack</button></li>
+            <li><button>Contato</button></li>
+            <li><button>Curiosidades</button></li>
+            </ul>
         </li>
         </ul>
         </nav>
         `
+    /**handle para realizar a animação de abertura e fechadura do menu @param isOpenAnimation */
+    const handleAnimationMenu = (isOpenAnimation) => {
+
+      const lines = Array.from(this.querySelectorAll(".line-1, .line-2, .line-3"));
+      if (lines.length <= 0) {
+        console.error("Linhas não achadas no array!");
+      }
+      const animations = [{transform:"translate(0, 7px) rotate(45deg)" }];
+      const animationsVisibility = [{opacity:0, display:"block"}]
+      const animateOptions = {duration:500, fill:"both", easing:"ease-in"};
+    
+      if (isOpenAnimation) {
+      lines[0].animate(animations, animateOptions);
+      animations[0].transform = "translate(0, -7px) rotate(-45deg)";
+      lines[1].animate(animationsVisibility, animateOptions)
+      lines[2].animate(animations, animateOptions);
+      return
     }
+      animations[0] = {left:"0", top:"0", position:"static", transform:"translate(0) rotate(0)"}
+      animationsVisibility[0] = {display:"block", opacity:1}
+      lines[0].animate(animations, animateOptions);
+      lines[1].animate(animationsVisibility, animateOptions)
+      lines[2].animate(animations, animateOptions);
+
+  }
+
+    const moonSvg = '<svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>'
+    const sunSvg = '<svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun preview-icon"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>'
+    const domParser = new DOMParser();
+    this.iconMoon = domParser.parseFromString(moonSvg, "image/svg+xml").documentElement;
+    this.iconSun = domParser.parseFromString(sunSvg, "image/svg+xml").documentElement;
+
+    const buttonDarkLight = document.createElement("button");
+    const buttonMenu = this.querySelector("button:has(#icon-menu)");
+    console.log(buttonMenu)
+    buttonDarkLight.appendChild(this.iconMoon);
+    const adjacentButton = document.querySelector(".item-btns-menu-container > button");
+    adjacentButton.insertAdjacentElement("beforebegin", buttonDarkLight);
+
+
+    buttonDarkLight.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (this.darkMode) {
+        buttonDarkLight.replaceChild(this.iconSun, this.iconMoon);
+        this.darkMode = false;
+        try {
+          document.documentElement.classList.replace("dark-mode", "light-mode");
+
+        } catch(e) {
+          console.error("Erro ao trocar a class 'dark-mode' por 'light-mode' ");
+        }
+        return
+      }
+
+      
+      buttonDarkLight.replaceChild(this.iconMoon, this.iconSun);
+      this.darkMode = true;
+
+      try {
+          document.documentElement.classList.replace("light-mode", "dark-mode");
+
+        } catch(e) {
+          console.error("Erro ao trocar a class 'dark-mode' por 'light-mode' ");
+      }
+
+    })
+
+    buttonMenu.addEventListener("click", (e) => {
+      const dropdownMenu = this.querySelector(".dropdown-menu");
+      e.preventDefault();
+      if (!this.openMenu) {
+        handleAnimationMenu(true);
+        this.openMenu = true;
+        dropdownMenu.classList.remove("hidden");
+        return
+      }
+  
+      handleAnimationMenu(false);
+      this.openMenu = false;
+      dropdownMenu.classList.add("hidden");
+
+    })
+
+  }
 }

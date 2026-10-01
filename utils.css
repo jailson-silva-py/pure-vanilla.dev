@@ -5,3 +5,20 @@
 .hidden {
     display: none;
 }
+
+.rotate-45deg {
+    transform: rotate(45deg);
+}
+
+.-rotate-45deg {
+    transform: rotate(-45deg);
+}
+
+.absolute-center {
+
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: tarn;
+
+}

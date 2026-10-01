@@ -23,9 +23,8 @@
     box-shadow: 0 0 1px 0 oklch(from var(---color-text) l c h / 15%);
 }
 
-
 .menu {
-
+   
     height: calc(var(--spacing) * 25);
     width: 100%;
     display: flex;
@@ -34,8 +33,85 @@
     justify-content: space-between;
     padding-inline: calc(var(--spacing) * 4);
     padding-block: calc(var(--spacing) * 4);
-    background: var(--color-background);
+    backdrop-filter: blur(1px);
 
+}
+
+#icon-menu {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:6px;
+
+}
+
+.line-1, .line-2, .line-3 {
+    background: oklch(from var(--color-text) l c h / 60%);
+    height: 1px;
+    width: 100%;
+    transition: transform 1000ms ease-in-out, position 300ms ease;
+    animation: expandWidth ease-in-out 1000ms;
+}
+
+#icon-moon {
+
+    stroke-dashoffset: 60;
+    stroke-dasharray: 60;
+    animation: spawnTopToBottom cubic-bezier(0.33, 0, 0.9, 1) 500ms, draw 1000ms ease forwards, fadeIn 500ms ease ;
+
+}
+
+#icon-sun {
+    animation: spawnBottomfromTop ease-out 1000ms;
+}
+
+#icon-sun path{
+    stroke-dasharray: 2;
+    stroke-dashoffset: 2;
+    animation: draw ease 1000ms forwards;
+}
+
+#icon-sun circle {
+    stroke-dasharray: 24.5;
+    stroke-dashoffset: 24.5; 
+    animation: draw ease 1000ms forwards;
+}
+
+#icon-moon:hover, #icon-sun:hover {
+    color: oklch(from var(--color-text) l c h / 80%);
+}
+
+#icon-menu:hover * {
+    background: oklch(from var(--color-text) l c h / 80%);
+}
+
+.dropdown-menu {
+    border-top: solid 1px var(--color-shadow);
+    border-bottom: solid 1px var(--color-shadow);
+    animation: expandHeight 500ms ease both;
+    position: absolute;
+    top:100%;
+    left: 0;
+    width: 100%;
+    padding-block:calc(var(--spacing)*4);
+    height: max-content;
+    background: var(--color-background);
+}
+.dropdown-menu li {
+    padding-block: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+}
+
+.dropdown-menu li:hover {
+
+    color: oklch(from var(--color-text) l c h / 50%)
 }
 
 .profile-name-content {

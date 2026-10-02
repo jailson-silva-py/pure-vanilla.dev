@@ -1,95 +1,146 @@
+import { getDateFormater } from "/utils/dateFormatter.js";
+import { buildLogs } from "/contraints/deployLogs.js";
+import { changeBuildLogs, changeDisabledBuildLog } from "/contraints/customEvents.js";
+
 export class BuildLogs extends HTMLElement {
-    _items = [];
-    constructor() {
-        super();
-        this.innerHTML = `
+
+  arrowSvg = null;
+  isOpen = false; 
+  isDisabled = true;
+
+  constructor() {
+    super();
+    const svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right preview-icon"><path d="m9 18 6-6-6-6"/></svg>'
+    const domParser = new DOMParser();
+    const svg = domParser.parseFromString(svgString, "image/svg+xml");
+    this.svg = svg.documentElement;
+
+    this.innerHTML = `
         <ul id="build-logs-container">
-        <slot></slot>
+        <li>
+        <button id="build-log-btn" class="icon-text-container hook-button disabled">
+        ${this.svg.outerHTML}
+        <span>Build Logs</span>
+        </button>
+        <div id="build-log-content" class="hidden">
+        </div>
+        </li>
+        <li>
+        <button id="deployment-summary-btn" class="icon-text-container hook-button disabled">
+        ${this.svg.outerHTML}
+        <span>Deployment Sumary</span>
+        </button>
+        </li>
+        <li>
+        <button id="deployment-checks-btn" class="icon-text-container hook-button disabled">
+        ${this.svg.outerHTML}
+        <span>Deployment Checks</span>
+        </button>
+        </li>
+        <li>
+        <button id="assigning-custom-domains-btn" class="icon-text-container hook-button disabled">
+        ${this.svg.outerHTML}
+        <span>Assigning Custom Domains</span>
+        </button>
+        </li>
         </ul>
         `
+  }
+
+  connectedCallback() {
+
+    const buttonElements = document.querySelectorAll(".icon-text-container.hook-button");
+    const buttons = buttonElements ? Array.from(buttonElements) : null
+
+    if (!buttons) {
+      console.error("Os botões do build não foram encontrados. Verifique se a classe está correta ou se está presente no DOM");
+      return
     }
 
 
-    get items() {
-      return this._items;
-    }
-
-    set items(value) {
-      if (Array.isArray(value)) {
-        this._items = value;
-        this.render();
+      const button = this.querySelector("#build-log-btn");
+      const svg = button.querySelector("svg");
+      if (!svg) {
+        console.error("Ícone arrow não encontrado dentro do botão.")
+        return
       }
-    }
 
-    static get observedAttributes() {
-
-      return ["items-json"]
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-      console.log("attribute change")
-      if (name === "items-json" && newValue) {
-        console.log("dentro da callback")
-        try {
-        this._items = JSON.parse(newValue);
-        this.render();
-        } catch {
-          console.error("Erro ao desestruturar o json do componente")
-          console.log(this._items)
-          console.log(JSON.parse(newValue));
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (this.isDisabled) return;
+        const changeBuildLogsEvent = new CustomEvent(changeBuildLogs, {bubbles:true, cancelable:true})
+        if (!this.isOpen) {
+          svg.classList.add("rotate-90");
+          this.isOpen = true;
+          e.target.dispatchEvent(changeBuildLogsEvent);
+          return
         }
-      }
+        svg.classList.remove("rotate-90")
+        this.isOpen = false;
+        e.target.dispatchEvent(changeBuildLogsEvent);
+
+      })
+
+    
+
+    const buildLogContent = document.querySelector("#build-log-content");
+
+    if (!buildLogContent) {
+      console.error("O content do build log não foi encotrado, verifique se o id está correto ou se está presente no DOM");
+      return;
+    }
+      async function typeLogs() {
+        const sleep = (ms) =>  new Promise((resolve, _) => setTimeout(resolve, ms));
+        for (let i = 0; i < buildLogs.length; i++) {
+          const currObj =  buildLogs[i];
+          const p = document.createElement("p");
+          p.classList.add(currObj.type);
+          const currText = currObj.text;
+          buildLogContent.appendChild(p);
+          p.textContent = getDateFormater()+" "
+          for (let l = 0; l < currText.length; l++) {
+            const currC = currText[l];
+            p.textContent += currC;
+            await sleep(10);
+          }
+    
+          if (currObj.type === "error") {
+            await sleep(500);
+          }
+        }
+     
+
     }
 
-    render() {
-      const ul = this.querySelector("#build-logs-container");
+    document.addEventListener(changeDisabledBuildLog, () => {
+      this.isDisabled = !this.isDisabled;
+      const hasClassDisabled = button.classList.contains("disabled");
+      if (this.isDisabled) {
+        if (hasClassDisabled) return;
+        button.classList.add("disabled");
+        return
+      }
+      if (!hasClassDisabled) return;
+      button.classList.remove("disabled");
+      
 
-      if (!ul) {
-        console.error("A lista não foi encontrada");
+    })
+
+
+    document.addEventListener(changeBuildLogs, (e) => {
+      e.preventDefault();
+      if (this.isOpen) {
+        buildLogContent.classList.remove("hidden");
+        if (!buildLogContent.innerHTML.trim()) {
+          typeLogs();
+        }
         return;
       }
+      buildLogContent.classList.add("hidden");
 
-      this.items.map(item => {
+    })
+  
+  }
 
-        const li = document.createElement("li");
-        const button = document.createElement("button");
-        button.classList.add("icon-text-container", "hook-button");
-        const svg = document.createElement("svg");
-        const span = document.createElement("span");
-      
-        span.textContent = item
-         
-        svg.setHTMLUnsafe('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right preview-icon"><path d="m9 18 6-6-6-6"/></svg>')
-        button.appendChild(svg);
-        button.appendChild(span);
-        
-        button.addEventListener("click",(e) =>  {
-          e.preventDefault();
-          console.log("no on click")
-          const isRotate = svg.classList.contains("rotate-90") 
-          if (!isRotate) {
-            svg.classList.add("rotate-90");
-            return
-          }
-          svg.classList.remove("rotate-90")
-          
-        })
 
-        button.addEventListener("auxclick",(e) =>  {
-          e.preventDefault();
-          console.log("no mouse leave")
-          const isRotate = svg.classList.contains("rotate-90") 
-          if (!isRotate) {
-            return
-          }
-          svg.classList.remove("rotate-90")
-        })
-      
-        li.appendChild(button);
-        ul.appendChild(li);
-        
-      })
-     
-    }
 }
- 

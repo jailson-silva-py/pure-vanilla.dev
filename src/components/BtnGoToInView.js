@@ -19,12 +19,15 @@ export class BtnGoToInView extends HTMLElement {
     }
     this.button.addEventListener("click", (e) => {
       e.preventDefault();
+      const isNotAboutPage = !location.href.endsWith("/about.html");
+      if (isNotAboutPage) {
+        location.replace("/about.html");
+        return
+        
+      }
       const goTo = this.getAttribute("goto");
       const goToElement = document.querySelector(`#${goTo}`);
       const buttonGoToElement = document.querySelector(`li:has(#${goTo}) button`);
-      
-      //Esconder o dropdown antes de scrollar pro elemento pra não atrapalhar o conteúdo
-      
       
       //Verificar se o elemento não tá oculto para aí sim poder clicar nele.
       const isHiddenGoTo = goToElement.classList.contains("hidden");

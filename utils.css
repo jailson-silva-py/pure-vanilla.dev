@@ -6,14 +6,6 @@
     display: none;
 }
 
-.rotate-45deg {
-    transform: rotate(45deg);
-}
-
-.-rotate-45deg {
-    transform: rotate(-45deg);
-}
-
 .absolute-center {
 
     position: absolute;
@@ -21,4 +13,27 @@
     left: 50%;
     transform: tarn;
 
+}
+
+.disabled {
+
+    opacity: 70%;
+
+}
+
+.info {
+    color: var(--color-text);
+}
+
+.success {
+    color:var(--color-success);
+}
+
+.error {
+    color:var(--color-error)
+
+}
+
+.animate-spin {
+    animation: spin infinite 800ms ease-in-out;
 }

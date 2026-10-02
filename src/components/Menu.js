@@ -42,10 +42,10 @@ export class Menu extends HTMLElement {
         `
         //Verificação de tema correto e alteração nos elementos de acordo com.
         const darkModeStorage = localStorage.getItem("darkMode");
-        console.log(darkModeStorage)
+
         const darkModeValue = darkModeStorage ? JSON.parse(darkModeStorage):null;
         if (darkModeValue === null) {
-          console.log("Não há darkMode value");
+          console.error("Não há darkMode value");
           localStorage.setItem("darkMode", JSON.stringify(this.darkMode));
         }
         this.darkMode = darkModeValue;
@@ -55,7 +55,6 @@ export class Menu extends HTMLElement {
           const correctMode = this.darkMode ? "dark-mode":"light-mode";
           document.documentElement.classList.replace(incorrectMode, correctMode);
         }
-        console.log(this.darkMode, darkModeValue)
         
 
     /**handle para realizar a animação de abertura e fechadura do menu @param isOpenAnimation */
@@ -92,7 +91,7 @@ export class Menu extends HTMLElement {
 
     const buttonDarkLight = document.createElement("button");
     const buttonMenu = this.querySelector("button:has(#icon-menu)");
-    console.log(buttonMenu)
+
     buttonDarkLight.appendChild(this.darkMode ? this.iconMoon : this.iconSun);
     const adjacentButton = document.querySelector(".item-btns-menu-container > button");
     adjacentButton.insertAdjacentElement("beforebegin", buttonDarkLight);

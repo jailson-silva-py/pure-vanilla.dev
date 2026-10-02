@@ -12,6 +12,8 @@
     --color-background:oklch(0.1696 0.0017 17.32);
     --color-text:oklch(0.8544 0.0197 76);
     --color-shadow:oklch(from var(--color-text) l c h / 15%);
+    --color-error:oklch(57.884% 0.22677 28.237);
+    --color-success: oklch(55.04% 0.17772 141.179);
     --spacing:0.25rem;
     --font-comfortaa:"Comfortaa", sans-serif;
     --font-gowun-batang:"Gowun Batang", serif;
@@ -80,6 +82,7 @@ body {
 }
 
 header {
+    z-index: 4;
     position: sticky;
     top:0px;
     left: 0px;

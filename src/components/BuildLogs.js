@@ -1,6 +1,6 @@
-import { getDateFormater } from "/utils/dateFormatter.js";
-import { buildLogs } from "/contraints/deployLogs.js";
-import { changeBuildLogs, changeDisabledBuildLog } from "/contraints/customEvents.js";
+import { getDateFormater } from "/src/utils/dateFormatter.js";
+import { buildLogs } from "/constraints/deployLogs.js";
+import { changeBuildLogs, changeDisabledBuildLog } from "/constraints/customEvents.js";
 
 export class BuildLogs extends HTMLElement {
 

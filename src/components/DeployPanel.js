@@ -1,4 +1,4 @@
-import { changeBuildLogs, changeDisabledBuildLog } from "/contraints/customEvents.js";
+import { changeBuildLogs, changeDisabledBuildLog } from "/constraints/customEvents.js";
 
 export class DeployPanel extends HTMLElement {
 

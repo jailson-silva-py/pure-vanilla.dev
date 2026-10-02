@@ -1,4 +1,4 @@
-import { folderChange, foldersMaximizeAll, foldersMinimizeAll } from "/contraints/customEvents.js";
+import { folderChange, foldersMaximizeAll, foldersMinimizeAll } from "/constraints/customEvents.js";
 
 export class Folders extends HTMLElement {
   _folders = [];

@@ -1,4 +1,4 @@
-import { changeMenuState } from "/contraints/customEvents.js";
+import { changeMenuState } from "/constraints/customEvents.js";
 
 export class Menu extends HTMLElement {
   iconMoon = null;

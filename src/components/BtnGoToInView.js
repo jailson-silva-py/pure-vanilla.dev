@@ -1,4 +1,4 @@
-import { changeMenuState } from "/contraints/customEvents.js";
+import { changeMenuState } from "/constraints/customEvents.js";
 
 export class BtnGoToInView extends HTMLElement {
   button = null;

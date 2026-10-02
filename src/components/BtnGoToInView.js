@@ -19,7 +19,8 @@ export class BtnGoToInView extends HTMLElement {
     }
     this.button.addEventListener("click", (e) => {
       e.preventDefault();
-      const isNotAboutPage = !location.href.endsWith("/about.html") || !location.href.endsWith("/about");
+      const isNotAboutPage = !location.href.endsWith("/about.html") && !location.href.endsWith("/about");
+
       if (isNotAboutPage) {
         location.replace("/about.html");
         return

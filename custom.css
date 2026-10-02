@@ -110,6 +110,10 @@
     align-items: center;
 }
 
+.dropdown-menu li button, .dropdown-menu li > * {
+    width: 100%;
+}
+
 
 .dropdown-menu li:hover {
 
